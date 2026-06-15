@@ -1,0 +1,203 @@
+/* =========================================================================
+   ScopeMaster — Landing page
+   Sistema editorial inspirado em Linear / Vercel / Stripe (awesome-design-md):
+   canvas profundo, hairlines de 1px no lugar de brilhos, tracking negativo
+   agressivo no display, rótulos em monoespaçada, cantos curtos (2–6px),
+   acento usado com parcimônia. Paleta segue a da ScopeMaster.
+   ========================================================================= */
+
+.sm-landing {
+  position: relative;
+  min-height: 100vh;
+  color: #f4f1f7;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  background-color: #070605;
+  /* tracking/feature de display mais refinado */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vinheta quente + leve glow roxo, fixos atrás de tudo (contido, não decorativo) */
+.sm-landing::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -8%, rgba(124, 58, 237, 0.16), transparent 62%),
+    radial-gradient(ellipse at 50% -2%, #241a14 0%, #140f0c 32%, #0a0808 62%, #070605 100%);
+}
+.sm-landing > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Tokens utilitários ---- */
+.lp-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.lp-hair {
+  border-color: rgba(255, 255, 255, 0.09);
+}
+.lp-ink-muted {
+  color: #a89fb5;
+}
+.lp-ink-subtle {
+  color: #6f6878;
+}
+
+/* Régua/divisor de seção */
+.lp-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Grade técnica do hero (estilo "blueprint", some nas bordas) */
+.lp-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 35%, black, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 35%, black, transparent 78%);
+}
+
+/* Eyebrow numerado em monoespaçada */
+.lp-eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #a89fb5;
+}
+
+/* ---- Superfícies (chapadas, com hairline — sem vidro pesado) ---- */
+.lp-card {
+  background: rgba(20, 16, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 4px;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.lp-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(26, 21, 32, 0.7);
+}
+
+/* Célula de grade hairline (recursos) */
+.lp-cell {
+  background: #0c0a0f;
+  transition: background 0.2s ease;
+}
+.lp-cell:hover {
+  background: #131019;
+}
+
+/* ---- Botões: cantos curtos, decididos ---- */
+.lp-btn {
+  background: #7c3aed;
+  color: #fff;
+  border-radius: 3px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  font-weight: 500;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.lp-btn:hover {
+  background: #8b5cf6;
+  transform: translateY(-1px);
+}
+.lp-btn-ghost {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f4f1f7;
+  border-radius: 3px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.lp-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Navbar */
+.sm-nav {
+  background: rgba(10, 8, 7, 0.7);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Ponto de status piscando */
+@keyframes lp-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.lp-blink {
+  animation: lp-blink 1.8s ease-in-out infinite;
+}
+
+/* ---- Marquee dos logos ---- */
+@keyframes sm-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.sm-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: sm-marquee 32s linear infinite;
+}
+.sm-marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* ---- Flutuação do visual do hero ---- */
+@keyframes sm-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.sm-float {
+  animation: sm-float 7s ease-in-out infinite;
+}
+
+/* ---- Acordeão (grid-rows trick) ---- */
+.sm-acc {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.sm-acc.open {
+  grid-template-rows: 1fr;
+}
+.sm-acc > div {
+  overflow: hidden;
+}
+
+/* ---- Card animado do rodapé (linhas topográficas + brilho) ---- */
+@keyframes sm-topo {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.sm-topo-track {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: sm-topo 26s linear infinite;
+}
+.sm-topo-track > svg {
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0;
+}
+@keyframes sm-glow {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.75; transform: translate(-50%, -50%) scale(1.15); }
+}
+.sm-glow {
+  animation: sm-glow 8s ease-in-out infinite;
+}
+
+.sm-noscroll::-webkit-scrollbar {
+  display: none;
+}

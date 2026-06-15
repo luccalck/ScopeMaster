@@ -1,0 +1,454 @@
+
+Curso Superior de Análise e Desenvolvimento de Sistemas
+Especificação dos Requisitos do Software e Análise do Projeto <ScopeMaster>
+Versão <1.1>
+Equipe:
+Ana Carolina Gonçalves Davi Marcondes Paes de Souza
+João Gabriel Floriano Olímpio João Pedro Fonseca Alves de Carvalho
+Lucca Castilho Costa
+
+Lucas Souza da Silva Miguel Oliveira de Almeida Pedro de Lima Cavalcanti
+Prof.º Wesley Fioreze Taubaté, 2026
+
+Histórico das Revisões
+
+Data 23/03/2026
+
+Versão
+
+Descrição
+
+Autor
+
+1.0
+
+Focada em Engenharia de Requisitos e
+
+Equipe ScopeMaster
+
+Modelagem, o trabalho consistiu em definir o
+
+escopo do sistema através da compreensão do
+
+problema, identificação do público-alvo e das
+
+funcionalidades principais. A partir disso, foram
+
+documentados os requisitos funcionais e não
+
+funcionais que guiarão o desenvolvimento. Para a
+
+estruturação técnica do projeto, elaboramos a
+
+modelagem UML e de dados, contemplando os
+
+diagramas de Casos de Uso, Classes,
+
+Entidade-Relacionamento e os quatro primeiros
+
+de sequência. Por fim, o fluxo de navegação
+
+visual foi estabelecido com a criação de cinco
+
+protótipos de alta fidelidade das telas essenciais
+
+do sistema.
+
+10/5/2026
+
+1.1
+
+Implementamos a primeira versão funcional do
+
+Equipe ScopeMaster
+
+sistema, integrando as interfaces de front-end ao
+
+back-end e ao banco de dados. O foco foi garantir
+
+a persistência e a gestão de projetos e requisitos
+
+por meio de chamadas HTTP, permitindo fluxos
+
+completos de cadastro, listagem e edição com as
+
+devidas validações.
+
+Sumário
+
+1. Introdução
+
+5
+
+1.1 Objetivos deste documento
+
+5
+
+1.2 Escopo do produto
+
+6
+
+1.2.1 Nome do produto e de seus componentes principais
+
+6
+
+1.2.2 Descrição do produto
+
+7
+
+1.2.3 Missão do produto
+
+8
+
+1.2.4 Tabela de viabilidade
+
+8
+
+1.2.5 Justificativa
+
+9
+
+1.3 Definições e siglas
+
+10
+
+1.4 Técnica(s) utilizada(s) para levantamento de requisitos
+
+11
+
+2. Requisitos Específicos
+
+11
+
+2.1 Requisitos Funcionais (RF)
+
+11
+
+2.1.1 Fluxo Principal:
+
+13
+
+2.1.2 Fluxos Alternativos / Subfluxos:
+
+13
+
+2.2 Requisitos Não Funcionais (RNF)
+
+14
+
+2.3 Regras de Negócio (RN)
+
+16
+
+3. Cronograma do Projeto
+
+17
+
+3.1 Planejamento de Sprints 
+
+17
+
+4. Protótipo do produto
+
+18
+
+5. Diagramas UML
+
+21
+
+5.1 Diagrama de Casos de Uso
+
+21
+
+5.2 Diagrama de Classes
+
+22
+
+5.3 Diagrama de Sequência
+
+23
+
+5.3.1 Diagrama de Sequência [RF 01] ­ Cadastro de Usuário
+
+24
+
+5.3.2 Diagrama de Sequência [RF 02] ­ Login de Usuário
+
+25
+
+5.3.3 Diagrama de Sequência [RF 03] ­ Criação de projeto
+
+25
+
+5.3.4 Diagrama de Sequência [RF 04] ­ Listagem de projetos
+
+26
+
+5.3.5 Diagrama de Sequência [RF 05] ­ Edição de projetos
+
+26
+
+5.3.6 Diagrama de Sequência [RF 06] ­ Cadastro de requisitos
+
+27
+
+5.4 Diagrama de Atividade
+
+27
+
+5.4.1 Diagrama de Atividade [RF 09] ­ Validação de Requisitos pelo Cliente
+
+28
+
+5.4.2 Diagrama de Atividade [RF 10] ­ Geração de Documentação Automática 29
+
+5.4.3 Diagrama de Atividade [RF 06] ­ Cadastro de Requisito
+
+30
+
+5.5 Diagrama Entidade-Relacionamento (DER)
+
+31
+
+6. Casos de Testes
+
+31
+
+7. Apêndices
+
+35
+
+1 Introdução
+No contexto dinâmico do desenvolvimento tecnológico e em resposta aos desafios práticos propostos pela SAGA SENAI, a comunicação ineficiente e a falta de acompanhamento em tempo real são obstáculos que frequentemente comprometem a entrega de software. Muitas vezes, a dificuldade em saber o que cada membro da equipe está fazendo gera desalinhamento, atrasos e a necessidade de constantes alinhamentos presenciais.
+Para solucionar esse problema, o ScopeMaster foi concebido com a função principal de criar e monitorar projetos e requisições de forma centralizada e visual. Nosso aplicativo visa proporcionar uma acessibilidade muito mais fácil e ágil para toda a equipe envolvida. Ao concentrar painéis de métricas, listas de requisitos e o status de cada frente de trabalho em um único lugar, o sistema elimina a necessidade de reuniões constantes e desnecessárias para repasse de status.
+A grande premissa do projeto é permitir que a equipe consiga visualizar com total nitidez o que está sendo produzido naquele exato momento. Com recursos que apontam o progresso em tempo real e indicam visualmente os requisitos pendentes, o aplicativo atua ativamente diminuindo o desfalque ou gargalos em qualquer área específica do ciclo de desenvolvimento.
+Neste cenário de otimização e transparência, este documento visa formalizar e detalhar de forma técnica todos os requisitos do sistema. O objetivo é estabelecer um guia claro que garanta que essas necessidades de gestão e visualização sejam traduzidas fielmente nas funcionalidades do ScopeMaster, guiando a equipe rumo ao sucesso do projeto.
+1.1Objetivos deste documento Este documento visa formalizar e detalhar de forma técnica e inequívoca todos os requisitos funcionais, não funcionais e restrições de projeto do sistema ScopeMaster. O objetivo principal é estabelecer um contrato técnico entre a equipe de desenvolvimento e os stakeholders, garantindo que as necessidades de negócio sejam traduzidas fielmente em funcionalidades de software, minimizando ambiguidades e riscos durante o ciclo de vida de desenvolvimento (SDLC).
+
+Público Alvo: Stakeholders do projeto, analistas de sistemas, desenvolvedores de software, equipe de QA (Quality Assurance) e gestores de projeto.
+1.2Escopo do produto O ScopeMaster é uma ferramenta de gerenciamento de requisitos e projetos projetada para facilitar a interação entre clientes e equipes técnicas. A plataforma permite a criação de projetos, o detalhamento de requisitos (funcionais e não funcionais) e o acompanhamento visual do progresso das Sprints.
+1.2.1 Nome do produto e de seus componentes principais
+ ScopeMaster
+Componentes A:
+ Módulo de Autenticação e Gestão de Usuários: Responsável pelo controle de acesso seguro, diferenciando as permissões entre Gestores (com poder de edição), Desenvolvedores (visualização técnica) e Clientes (validação e aprovação).
+ Módulo de Gestão de Projetos: O núcleo central onde são criados os ambientes de trabalho, permitindo organizar diferentes softwares ou sistemas em categorias separadas.
+ Repositório de Requisitos (Backlog): Componente onde se realiza o cadastro, detalhamento e a priorização dos Requisitos Funcionais (RF) e Não Funcionais (RNF).
+ Painel de Validação e Feedback: Uma interface específica para que o cliente possa interagir com os requisitos, permitindo a aprovação digital ou a solicitação de ajustes, garantindo a rastreabilidade das decisões.
+ Dashboard de Monitoramento: Componente visual que gera indicadores sobre a saúde do escopo, mostrando o percentual de requisitos aprovados, pendentes ou em desenvolvimento.
+Componentes B:
+ Interface Web (Frontend): Camada de interação com o usuário, desenvolvida com foco em usabilidade (conforme o protótipo do Figma).
+
+ Serviço de Backend e Banco de Dados (Supabase BaaS): Camada de persistência e regras de acesso gerenciada pelo Supabase, que provê API REST automática sobre banco de dados PostgreSQL, autenticação JWT nativa e Row-Level Security (RLS) para controle de permissões por perfil de usuário, eliminando a necessidade de um servidor backend próprio.
+1.2.2 Descrição do produto
+O ScopeMaster é uma ferramenta digital criada para ajudar equipes de tecnologia e seus clientes a organizarem e aprovarem as ideias de um projeto de software de um jeito simples, evitando que o trabalho se perca ou seja feito de forma errada. O sistema atua como uma plataforma de gestão de requisitos e controle de escopo. Ele será aplicado em empresas de desenvolvimento de software e departamentos de TI, servindo como a interface central entre o analista de sistemas e o cliente final. O uso ocorre por meio de um fluxo de trabalho onde os requisitos são cadastrados com níveis de prioridade, detalhados tecnicamente e submetidos a uma etapa de validação digital. Isso permite que tanto a equipe de desenvolvimento quanto o cliente tenha uma visão clara do que foi acordado, minimizando o "escopo não gerenciado" e o retrabalho.
+Para a construção desta solução, são utilizadas tecnologias modernas de desenvolvimento web. A interface (Front-end) é construída com React e Vite como base da aplicação, utilizando TypeScript como linguagem principal para garantir tipagem estática, manutenção e a interatividade das telas. A estilização é realizada com Tailwind CSS, complementada pelas bibliotecas de componentes Shadcn/UI e MUI, que garantem uma interface responsiva, acessível e visualmente consistente. No que diz respeito ao Back-end e à persistência de dados, o projeto adota o Supabase como plataforma BaaS (Backend as a Service), eliminando a necessidade de um servidor back-end próprio e oferecendo autenticação integrada, banco de dados PostgreSQL gerenciado e armazenamento em nuvem. O desenvolvimento é centralizado no VS Code como ambiente de codificação principal.
+
+A importância do ScopeMaster reside na sua capacidade de transformar necessidades de negócio em documentação técnica rastreável. O maior benefício para a equipe é a organização absoluta das demandas, enquanto para o cliente, o benefício é a transparência total sobre o progresso do projeto, resultando em um produto final que entrega exatamente o que foi planejado.
+
+1.2.3 Missão do produto
+Prover uma solução digital eficiente, segura e escalável para o gerenciamento de requisitos e escopo de projetos, promovendo a organização técnica, a rastreabilidade das decisões e a melhoria na tomada de decisão estratégica entre equipes de desenvolvimento e stakeholders.
+
+1.2.4 Tabela de viabilidade
+Item Hospedagem
+Banco de Dados
+Desenvolvimento Ferramentas
+Domínio Web
+
+Descrição Vercel (Início do plano Hobby escalando conforme uso) Supabase (Início do Plano Free, escalando conforme uso) Mão de obra Técnica da Equipe IDEs, plataformas auxiliares e licença (Ex: Figma, etc) Registro de domínio anual
+
+Valor Unitário R$ 0,00 a R$ 100,00 / Mês R$ 0,00 a R$ 125,00 / Mês R$ 3.072,00 R$ 300,00
+R$ 40,00
+
+Valor total estimado: R$ 3.637,00
+
+Plano Starter (Free)
+
+Contrato Atual R$0.00
+
+Pro
+
+R$49.00 / usuário / mês
+
+Limitações Estratégicas
+
+1 projeto ativo, até 3
+
+membros por equipe,
+
+funcionalidades
+
+de
+
+exportação bloqueadas.
+
+Projetos
+
+ilimitados.
+
+Gestão de requisitos e
+
+relatórios padrão
+
+Business Enterprise
+
+R$89.00 / usuário / mês Mínimo de R$15.000 / ano
+
+Inclui
+
+segurança
+
+avançada (Row-Level
+
+Security) e auditoria
+
+técnica.
+
+SLAs, SSO (SAML) e
+
+isolamento total para
+
+grandes corporações.
+
+1.2.5 Justificativa
+Hospedagem e Banco de Dados (R$0 a R$225/mês): Começam em R$0,00 para a fase de testes e desenvolvimento. Os valores de R$100 e R$125 são os tetos previstos para quando o sistema começar a receber usuários reais e precisar de mais processamento e armazenamento no servidor. Domínio Web (R$40/ano): Adicionado para dar credibilidade B2B. Nenhum cliente corporativo compra software hospedado em domínios gratuitos. Desenvolvimento (R$3.072,00): Valor estimado com base no esforço técnico da equipe ao longo das três Sprints do projeto. Considerando uma média de 4 horas semanais por integrante, ao longo de 12 semanas, com 8 membros, o projeto acumula 384 horas-homem. O valor de R$8,00/hora foi adotado como referência abaixo do piso do mercado de trabalho, compatível com o contexto acadêmico sem remuneração comercial. Para fins de viabilidade comercial real, este custo seria de R$15.000­R$25.000 com desenvolvedores júnior remunerados ao mercado. Ferramentas (R$300,00): Custo reservado para eventuais licenças de ferramentas de design, prototipação ou produtividade utilizadas pela equipe durante a criação.
+ Plano Starter (R$0,00): O valor é zero para eliminar o atrito inicial. O limite de 1 projeto ativo e 3 membros é suficiente para que equipes pequenas avaliem a ferramenta sem compromisso. Quando a equipe crescer ou precisar gerenciar múltiplos projetos simultaneamente, a migração para o plano pago é natural. O bloqueio da exportação de documentos neste plano garante que usuários profissionais -- que precisam entregar documentação formal ao cliente -- necessariamente migrem para o Pro.
+
+ Plano Pro (R$49,00): O valor foi fixado competitivamente em relação às ferramentas consolidadas do mercado. Enquanto soluções como Jira (Standard) e Linear são cotadas em dólar (~US$8­16/usuário/mês), o ScopeMaster oferece cobrança em Reais, eliminando a exposição à variação cambial e os impostos de remessa internacional. Empresas brasileiras que buscam previsibilidade de custo e suporte em português encontram no plano Pro uma alternativa nacional viável, especialmente para equipes de até 20 usuários onde o custo total ainda é competitivo.
+ Plano Business (R$89,00): O salto de preço se justifica pela inclusão de Row-Level Security (RLS), auditoria técnica e relatórios avançados funcionalidades equivalentes ao Jira Premium (~$16/usuário, R$82) e Monday.com Pro ($16/usuário), porém com cobrança em Reais. Empresas que lidam com dados sensíveis de múltiplos clientes e projetos simultâneos encontram nesse plano a segurança de isolamento total entre workspaces sem exposição cambial.
+ Plano Enterprise (R$15.000+): Grandes empresas exigem garantias em contrato (SLA) e suporte VIP. O piso de 15 mil reais garante que nossa equipe tenha margem financeira suficiente para cobrir os riscos legais e operacionais de atender uma corporação.
+
+1.3Definições e siglas
+
+Número 1 2
+3
+4
+5
+
+Sigla ERS RF / RNF RN
+SaaS
+UI/UX
+
+Definição Especificação de Requisitos de Software. Requisito Funcional / Requisito Não Funcional.
+Regra de Negócio: Normas e diretrizes que regem a lógica do domínio. Software as a Service (Software como Serviço): Modelo de distribuição do ScopeMaster User Interface (Interface do Usuário) / User Experience (Experiência do Usuário), focados no visual limpo e navegação ágil do sistema
+
+1.4Técnica(s) utilizada(s) para levantamento de requisitos As seguintes técnicas foram utilizadas:
+ Brainstorming  Observação do processo atual  Análise de sistemas similares  Prototipagem de alta fidelidade (Figma):
+2. Requisitos Específicos
+2.1 Requisitos Funcionais (RF)
+[RF 01] ­ Cadastro de usuário  Descrição: O sistema disponibiliza um formulário para que o interessado informe nome, e-mail e senha para criar uma conta.  Ator Principal: Usuário  Pré-condições: Nenhuma. O formulário de cadastro é acessível publicamente, sem necessidade de autenticação prévia.
+[RF 02] ­ Login de usuário  Descrição: O sistema valida as credenciais (e-mail e senha) fornecidas pelo usuário para liberar o acesso às funcionalidades internas.  Ator Principal: Usuário Cadastrado  Pré-condições: Possuir cadastro ativo no sistema.
+[RF 03] ­ Criação de projetos  Descrição: Permite que o usuário defina o nome, descrição e objetivos de um novo projeto de software que será gerenciado.  Ator Principal: Usuário Autenticado  Pré-condições: Estar logado no sistema.
+[RF 04] ­ Listagem de projetos  Descrição: Exibe uma visão geral de todos os projetos em que o usuário tem participação ou permissão de visualização.  Ator Principal: Usuário Autenticado
+
+ Pré-condições: Estar logado e possuir projetos vinculados. [RF 05] ­ Edição de projetos
+ Descrição: Permite alterar metadados do projeto (como nome ou status) que foram inseridos anteriormente.
+ Ator Principal: Usuário Autenticado  Pré-condições: O projeto já deve ter sido criado. [RF 06] ­ Cadastro de requisitos  Descrição: O usuário insere o código identificador (ex.: RF01), a descrição, o tipo
+(funcional/não funcional) e a prioridade de uma nova funcionalidade dentro de um projeto específico. O código é definido manualmente pelo Analista e deve ser único dentro do projeto.  Ator Principal: Analista / Desenvolvedor  Pré-condições: Estar em um projeto selecionado. [RF 07] ­ Edição de requisitos  Descrição: Permite modificar o texto ou os atributos de um requisito que já consta na base de dados do projeto. Caso o requisito esteja com status "Aprovado", o sistema deve retornar automaticamente o status para "Em Revisão" antes de liberar a edição, em conformidade com a RN004.  Ator Principal: Analista / Desenvolvedor  Pré-condições: O requisito deve existir previamente. [RF 08] ­ Exclusão de requisitos  Descrição: Remove um requisito do projeto. Geralmente solicita confirmação para evitar perdas acidentais.  Ator Principal: Analista / Desenvolvedor  Pré-condições: O requisito deve existir previamente no projeto e o usuário deve possuir permissão de edição. [RF 09] ­ Validação de requisitos pelo cliente  Descrição: O cliente visualiza a lista de requisitos e marca cada um como "Aprovado" ou "Rejeitado" (com feedback obrigatório em caso de rejeição). Ao confirmar uma aprovação, o sistema notifica o Analista responsável pelo projeto.  Ator Principal: Cliente  Pré-condições: Estar logado com perfil "Cliente" e possuir projetos com requisitos cadastrados vinculados à sua conta. [RF 10] ­ Geração de documentação automática
+
+ Descrição: O sistema compila todos os requisitos aprovados e gera um arquivo (PDF/Docx) padronizado para assinatura ou consulta.
+ Ator Principal: Usuário Autenticado  Pré-condições: Existência de ao menos um requisito com status "Aprovado" no
+projeto.
+2.1.1 Fluxo Principal 1. O ator (Analista) acessa o sistema, informa suas credenciais (e-mail e senha) e realiza o login com sucesso. 2. O Analista solicita a criação de um novo projeto, preenche o formulário com os dados básicos (Nome e Descrição) e o sistema persiste a informação. 3. Dentro do painel do projeto criado, o Analista solicita a inclusão de um novo requisito, preenche os dados e confirma a operação. 4. O sistema valida a unicidade do código, persiste o requisito no banco de dados com o status inicial "Pendente" e exibe mensagem de sucesso. 5. O ator (Cliente) realiza o login no sistema, acessa o mesmo projeto e clica para analisar o requisito recém-cadastrado. 6. O Cliente revisa as informações, seleciona a opção "Aprovar" e confirma a validação. 7. O sistema registra a aprovação, altera o status do requisito para "Aprovado" no banco de dados e notifica o Analista. 8. O Analista acessa a funcionalidade de exportação do projeto e solicita a geração da documentação. 9. O sistema compila automaticamente os dados de todos os requisitos aprovados, gera o arquivo final estruturado (PDF/Word) e disponibiliza o link de download ao usuário, finalizando o processo.
+2.1.2 Fluxos Alternativos / Subfluxos A1 - E-mail já cadastrado: Caso o e-mail informado já exista na base de dados, o sistema deve impedir o cadastro, exibir um alerta visual informando que o endereço já está em uso e oferecer ao usuário as opções de realizar o login com a conta existente ou iniciar o processo de recuperação de senha.
+
+A2 - Campos Obrigatórios: Se o ator tentar salvar com campos obrigatórios vazios, o sistema deve destacar os campos em vermelho e impedir a submissão. A3 - Código de Requisito Duplicado: Se o usuário tentar salvar um requisito utilizando um identificador (ex: "RF01") que já existe dentro do projeto selecionado, o sistema deve impedir a gravação, exibir um alerta e solicitar que o código seja alterado. A4 - Cancelamento de Ação: Caso o usuário inicie o preenchimento do formulário de requisitos e clique no botão "Cancelar", o sistema deve exibir um aviso de confirmação ("Deseja descartar as alterações?") e, se confirmado, direcioná-lo de volta à listagem do projeto sem salvar os dados. A5 - Rejeição sem Justificativa: Caso o cliente selecione a opção "Rejeitar" para um requisito, mas tente salvar sem preencher o campo de observação/feedback, o sistema deve impedir a ação, destacar o campo de texto em vermelho e informar que a justificativa é obrigatória. A6 - Ausência de Requisitos Aprovados: Se o usuário tentar gerar a documentação de um projeto que ainda não possui nenhum requisito com o status "Aprovado", o sistema deve bloquear a geração do arquivo e emitir o aviso: "Não é possível gerar o documento, pois não há requisitos validados pelo cliente neste projeto". A7 - Falha na Exportação: Caso ocorra uma falha no servidor no momento de converter os dados para PDF/Docx, o sistema deve abortar a operação e exibir uma mensagem amigável: "Erro ao gerar o arquivo. Tente novamente em alguns instantes." A8 - Perda de Conexão (Sessão Expirada): Se o usuário demorar muito tempo inativo ou perder a conexão e tentar salvar um projeto/requisito com o token de login expirado, o sistema deve abortar a submissão, salvar os dados temporariamente no cache local (se possível) e redirecionar para a tela de login.
+2.2 Requisitos Não Funcionais (RNF) Estipulam as qualidades e restrições técnicas do sistema.
+
+ [RNF 01] ­ Segurança: O sistema deve utilizar protocolo HTTPS para proteger todos os dados em trânsito. O armazenamento persistente é gerenciado pelo Supabase (PostgreSQL), que garante criptografia em repouso conforme as políticas de segurança da plataforma, assegurando a confidencialidade das informações dos usuários.
+ [RNF 02] ­ Disponibilidade: O sistema deve estar disponível 24 horas por dia, sendo hospedado em uma plataforma em nuvem para garantir que clientes e analistas possam acessar o status dos projetos a qualquer momento.
+ [RNF 03] ­ Tempo de Resposta: O sistema deve garantir alta performance; o carregamento do Dashboard Geral e as transições de status dos requisitos devem ocorrer em no máximo 2 segundos sob condições normais de uso, proporcionando uma experiência fluida e sem travamentos perceptíveis ao usuário.
+ [RNF 04] ­ Interface Amigável: O design deve ser responsivo.  [RNF 05] ­ Compatibilidade: O sistema deve ser compatível com os principais
+navegadores web do mercado (Google Chrome, Mozilla Firefox, Microsoft Edge e Safari em suas versões mais recentes), garantindo que todas as funcionalidades operem corretamente independente do ambiente de acesso utilizado pelo usuário.  [RNF 06] - Escalabilidade: A arquitetura do sistema e a modelagem do banco de dados devem suportar o crescimento contínuo do volume de projetos, requisitos e usuários simultâneos sem que haja degradação perceptível na velocidade de navegação.  [RNF 07] - Privacidade e Conformidade (LGPD): O sistema deve gerenciar as informações em conformidade com a Lei Geral de Proteção de Dados, assegurando que senhas não sejam salvas em texto plano e permitindo a exclusão definitiva de contas e dados pessoais, caso o usuário solicite.  [RNF 08] - Manutenibilidade: O código-fonte da aplicação deve ser desenvolvido com foco em modularidade, facilitando manutenções futuras, correções de falhas e o repasse técnico para outros desenvolvedores.  [RNF 09] - Confiabilidade (Backup): O serviço responsável pelo armazenamento de dados da aplicação deve possuir rotinas automatizadas de backup para prevenir a perda definitiva do histórico de validações e dos projetos cadastrados em cenários de falha crítica.
+
+2.3 Regras de Negócio (RN)
+As Regras de Negócio definem as restrições lógicas e os processos que o software deve obedecer obrigatoriamente.
+ RN001 ­ Vínculo Requisito-Projeto: Um requisito deve estar obrigatoriamente vinculado a um único projeto. Não é permitida a existência de requisitos órfãos (sem projeto pai).
+ RN002 ­ Unicidade de Código: O sistema não deve permitir o cadastro de dois requisitos com o mesmo código identificador (Ex: RF01) dentro de um mesmo projeto.
+ RN003 ­ Fluxo de Validação: Um requisito só pode ser incluído na documentação automática (RF10) se o seu status atual for marcado como "Aprovado" pelo cliente (RF09).
+ RN004 ­ Restrição de Edição por Status: Um requisito com status "Aprovado" não pode ser editado diretamente. Ao tentar editá-lo, o sistema retorna automaticamente o status para "Em Revisão" antes de liberar a edição, garantindo que o cliente seja notificado da alteração na próxima validação (conforme RF07 e RF09).
+ RN005 ­ Exclusão com Dependência: O sistema não deve permitir a exclusão de um projeto que possua requisitos cadastrados (independentemente do status). É necessário excluir todos os requisitos do projeto ou arquivá-lo antes de removê-lo definitivamente.
+ RN006 ­ Nível de Acesso do Cliente: O usuário com perfil "Cliente" não possui permissão para criar, editar ou excluir requisitos (RF06, RF07, RF08), apenas visualizar e realizar a validação (RF09).
+ RN007 ­ Obrigatoriedade de Feedback: Caso o cliente rejeite um requisito na etapa de validação, o sistema deve tornar obrigatório o preenchimento de uma justificativa ou observação.
+
+3. Cronograma do Projeto
+O desenvolvimento do sistema ScopeMaster será conduzido por meio de uma abordagem ágil, visando entregas contínuas e alinhamento constante com as necessidades dos stakeholders. As atividades foram divididas em fases estratégicas que englobam desde a prototipação e modelagem de dados até a implementação das regras de negócio e geração de documentação automatizada. O cronograma abaixo detalha a distribuição dessas tarefas ao longo das Sprints estabelecidas para o projeto.
+3.1 Planejamento de Sprints
+A execução seguirá a metodologia ágil Scrum, dividida em ciclos de aproximadamente 4 a 5 semanas (conforme calendário acadêmico).  Sprint 01 (09 de Março a 06 de Abril de 2026): Planejamento e Estruturação
+ Levantamento de requisitos e criação do documento ERS.  Desenvolvimento de protótipos de alta fidelidade (Figma) para as telas principais.  Modelagem de dados e criação dos Diagramas UML (Casos de Uso, Classes e no mínimo 04
+Diagramas de Sequência).  Sprint 02 (06 de Abril a 11 de Maio de 2026): Módulos Core e Autenticação:
+ Desenvolvimento do Módulo de Autenticação e Segurança (HTTPS e criptografia).  Implementação dos requisitos funcionais de base: Cadastro de usuário (RF01), Login (RF02)
+e Criação/Listagem/Edição de Projetos (RF03, RF04, RF05).  Desenvolvimento de no mínimo 06 Diagramas de Sequência.  Sprint 03 (11 de Maio a Junho de 2026): Lógica de Negócio e Entrega Final:  Implementação do módulo de gerenciamento de requisitos: Cadastro (RF06), Edição (RF07) e
+Exclusão (RF08).  Implementação do Fluxo de Validação pelo Cliente (RF09) e Geração da Documentação
+Automática (RF10).  Validação das Regras de Negócio complexas (RN001 a RN007) e execução dos Casos de
+Testes (CT001 em diante).  Entrega final de todos os Diagramas de Sequência restantes do projeto.
+
+4. Protótipo do produto
+Nesta seção, apresentam-se as interfaces de alta fidelidade que guiarão o desenvolvimento do Front-end.  Link para o Protótipo: https://revamp-row-42812612.figma.site/login  Principais Telas: 1. Login
+
+2. Dashboard 3. Cadastro de Projetos
+
+4. Cadastro de requisitos 5. Validação de Requisitos
+
+5. Diagramas UML
+5.1 Diagrama de Casos de Uso
+O diagrama de casos de uso do ScopeMaster organiza a interação entre dois atores principais, onde o Analista/User assume a responsabilidade operacional de cadastrar, editar e excluir requisitos, além de gerir projetos e gerar documentações técnicas, enquanto o Cliente foca na supervisão e tomada de decisão através da listagem de projetos e da validação de entregas. Essa estrutura reflete a premissa de transparência do projeto, pois centraliza o fluxo de trabalho no analista e permite que o cliente acompanhe o progresso em tempo real no UC09 (Validar/Aprovar), eliminando a necessidade de reuniões constantes de status e garantindo que ambas as partes interajam em um ambiente seguro e autenticado pelos processos de cadastro e login.
+
+5.2 Diagrama de Classes
+O Usuário é o ponto de partida, sendo responsável por gerir vários Projetos e validar os seus Requisitos. Cada Projeto funciona como um contentor central que agrupa diversos requisitos, permitindo a sua criação e listagem. Por fim, a partir dos dados de um projeto, o sistema permite gerar uma Documentação específica, que consolida o conteúdo e o formato final do trabalho realizado. Em suma, o modelo organiza o fluxo desde a autenticação do utilizador até à entrega do documento final do projeto.
+
+5.3 Diagrama de Sequência
+Os Diagramas de Sequência apresentados a seguir detalham, em ordem cronológica, as interações entre os atores, a interface da aplicação e a camada de persistência (Supabase) durante a execução dos principais Requisitos Funcionais. Cada diagrama foca em um RF específico, evidenciando as mensagens trocadas entre os objetos, as chamadas à API REST do Supabase e os retornos correspondentes. Foram modelados os seis fluxos prioritários do sistema -- cadastro de usuário, login, criação, listagem e edição de projetos, além do
+
+cadastro de requisitos -- atendendo aos critérios de entrega da Sprint 1 (mínimo de quatro diagramas) e da Sprint 2 (mínimo de seis diagramas), conforme estabelecido no cronograma do projeto.
+5.3.1 Diagrama de Sequência [RF 01] ­ Cadastro de Usuário
+
+5.3.2 Diagrama de Sequência [RF 02] ­ Login de Usuário 5.3.3 Diagrama de Sequência [RF 03] ­ Criação de projeto
+
+5.3.4 Diagrama de Sequência [RF 04] ­ Listagem de projetos 5.3.5 Diagrama de Sequência [RF 05] ­ Edição de projetos
+
+5.3.6 Diagrama de Sequência [RF 06] ­ Cadastro de requisitos
+5.4 Diagrama de Atividade
+Os Diagramas de Atividade complementam a modelagem do sistema ao representar o fluxo lógico das operações que envolvem decisões, validações e múltiplos caminhos alternativos. Diferentemente dos Diagramas de Sequência -- que focam em "quem fala com quem" -- os de Atividade descrevem "o que acontece em cada passo" e "qual caminho seguir em cada decisão". Foram selecionados os Requisitos Funcionais com maior complexidade lógica para esta modelagem: a Validação de Requisitos pelo Cliente (RF09), que combina aprovação, rejeição e a obrigatoriedade de feedback (RN007); a Geração de Documentação Automática (RF10), que depende da existência de requisitos aprovados (RN003) e trata falhas de exportação; e o Cadastro de Requisito (RF06), que envolve validação de campos obrigatórios e unicidade de código (RN002). Os fluxos alternativos correspondentes (A2, A3, A4, A5, A6 e A7) estão devidamente identificados nas decisões dos diagramas.
+
+5.4.1 Diagrama de Atividade [RF 09] ­ Validação de Requisitos pelo Cliente
+
+5.4.2 Diagrama de Atividade [RF 10] ­ Geração de Documentação Automática
+
+5.4.3 Diagrama de Atividade [RF 06] ­ Cadastro de Requisito
+
+5.5 Diagrama Entidade-Relacionamento (DER)
+O Diagrama Entidade-Relacionamento do ScopeMaster representa a estrutura física do banco de dados PostgreSQL gerenciado pelo Supabase. O modelo é composto por cinco entidades principais: USUARIO armazena os dados de autenticação e perfil de cada membro da plataforma (Administrador, Desenvolvedor ou Cliente); PROJETO funciona como o contêiner central onde o trabalho é organizado; REQUISITO contém os itens de escopo cadastrados, sempre vinculados a um único projeto pai (RN001) com código único dentro dele (RN002); PROJETO_USUARIO é a entidade associativa que materializa o relacionamento N:N entre usuários e projetos, registrando o papel desempenhado por cada membro em cada projeto; e NOTIFICACAO concentra as mensagens enviadas ao Analista quando o Cliente realiza ações de validação (RF09). Os relacionamentos seguem a notação de cardinalidade clássica, com restrições de integridade referencial (ON DELETE CASCADE) garantindo que requisitos e vínculos não fiquem órfãos quando seus projetos pai forem removidos.
+6. Casos de Testes
+Os casos de teste a seguir validam os principais fluxos do ScopeMaster, cobrindo o caminho feliz dos Requisitos Funcionais e os Fluxos Alternativos críticos relacionados às Regras de Negócio.
+
+CT001 ­ Cadastro de usuário válido (RF01)  Pré-condições: nenhuma.  Passos: 1. Acessar a tela de cadastro. 2. Preencher nome, e-mail único e senha com 8+ caracteres. 3. Confirmar o cadastro.  Resultado esperado: usuário criado com perfil "Cliente" e status pendente de autorização; sistema exibe mensagem de sucesso.
+CT002 ­ Login de usuário válido (RF02)  Pré-condições: usuário cadastrado e autorizado.  Passos: 1. Acessar a tela de login. 2. Informar e-mail e senha corretos. 3. Confirmar.  Resultado esperado: sessão iniciada e redirecionamento para o Dashboard.
+CT003 ­ Login com credenciais inválidas (RF02 / Fluxo Alternativo)  Pré-condições: usuário cadastrado.  Passos: 1. Informar e-mail correto e senha incorreta. 2. Confirmar.  Resultado esperado: sistema bloqueia o acesso e exibe alerta visual "Credenciais inválidas".
+CT004 ­ Cadastro de e-mail já existente (A1)  Pré-condições: existir usuário com e-mail X.  Passos: 1. Tentar criar uma nova conta com o mesmo e-mail X.  Resultado esperado: cadastro bloqueado, alerta visual exibido e usuário recebe sugestão de fazer login ou recuperar senha.
+CT005 ­ Criação de projeto válido (RF03)  Pré-condições: usuário autenticado.
+
+ Passos: 1. Acessar a tela de Projetos e clicar em "Novo Projeto". 2. Preencher nome e descrição. 3. Confirmar.
+ Resultado esperado: projeto criado e listado em "Projetos".
+CT006 ­ Cadastro de requisito com código duplicado (RN002 / A3)  Pré-condições: existir requisito com código "RF01" no projeto.  Passos: 1. Tentar cadastrar outro requisito com o mesmo código "RF01" no mesmo projeto.  Resultado esperado: gravação bloqueada, alerta exibido solicitando código diferente.
+CT007 ­ Validação de requisito -- Aprovação (RF09)  Pré-condições: usuário com perfil Cliente, requisito com status "Pendente".  Passos: 1. Abrir os detalhes do requisito. 2. Clicar em "Aprovar".  Resultado esperado: status muda para "Aprovado", Analista recebe notificação e o requisito passa a ser elegível para a documentação automática.
+CT008 ­ Validação de requisito -- Rejeição sem justificativa (RN007 / A5)  Pré-condições: usuário Cliente, requisito "Pendente".  Passos: 1. Abrir os detalhes do requisito. 2. Clicar em "Rejeitar". 3. Confirmar a rejeição com o campo de justificativa vazio.  Resultado esperado: ação bloqueada, campo destacado em vermelho com a mensagem "A justificativa é obrigatória ao rejeitar um requisito".
+CT009 ­ Validação de requisito -- Rejeição com justificativa (RF09 / RN007)  Pré-condições: usuário Cliente, requisito "Pendente".  Passos: 1. Abrir os detalhes do requisito.
+
+2. Clicar em "Rejeitar". 3. Preencher a justificativa e confirmar.  Resultado esperado: status muda para "Rejeitado", a justificativa fica salva e visível no requisito, e o Analista é notificado da rejeição com a justificativa.
+CT010 ­ Geração de documentação sem requisitos aprovados (A6)  Pré-condições: projeto sem nenhum requisito com status "Aprovado".  Passos: 1. Abrir o Projeto. 2. Clicar em "Gerar Documentação".  Resultado esperado: geração bloqueada, mensagem "Não é possível gerar o documento, pois não há requisitos validados pelo cliente neste projeto".
+CT011 ­ Geração de documentação com requisitos aprovados (RF10)  Pré-condições: projeto com pelo menos 1 requisito "Aprovado".  Passos: 1. Abrir o Projeto. 2. Clicar em "Gerar Documentação".  Resultado esperado: PDF baixado contendo cabeçalho do projeto, data de geração, total de aprovados e tabela com código/tipo/descrição de cada requisito aprovado.
+CT012 ­ Edição de requisito aprovado (RN004 / RF07)  Pré-condições: requisito com status "Aprovado".  Passos: 1. Abrir o requisito e iniciar a edição.  Resultado esperado: sistema retorna o status para "Pendente" automaticamente antes de liberar a edição.
+CT013 ­ Exclusão de projeto com requisitos (RN005)  Pré-condições: projeto com requisitos cadastrados; usuário Administrador.  Passos: 1. Tentar excluir o projeto. 2. Confirmar a exclusão em cascata.
+
+ Resultado esperado: o sistema exclui requisitos, vínculos de membros e o projeto em si, conforme orientação da regra.
+CT014 ­ Cliente tentando criar requisito (RN006)  Pré-condições: usuário com perfil "Cliente" autenticado.  Resultado esperado: as ações de criar/editar/excluir requisito não estão disponíveis para o perfil Cliente; apenas visualização e validação (RF09).
+7. Apêndices
+Esta seção concentra os documentos de referência que embasaram a especificação do sistema ScopeMaster, servindo como material de apoio para auditoria e rastreabilidade das decisões técnicas.
+1. Apêndice A -- Documento SAGA SENAI Documento original disponibilizado, contendo os objetivos, escopo e entregáveis esperados de cada Sprint do projeto integrador. Este documento serviu como fonte primária para a definição do escopo, do cronograma e dos critérios de aceitação descritos neste ERS. PROJETO_SAGA_SENAI.pdf
+2. Apêndice B -- Repositório de Código-Fonte O código-fonte completo do ScopeMaster está versionado e disponível para consulta da banca avaliadora. Repositório: https://github.com/luccalck/ScopeMaster
+3. Apêndice C -- Scripts de Modelagem do Banco de Dados Lista dos scripts SQL que materializam a modelagem descrita no DER (Seção 5.5), executados no SQL Editor do Supabase: 1. Modelagem de Usuários e Projetos com Enums e RLS.txt Cria as tabelas usuario, projeto, requisito e projeto_usuario, além dos tipos enumerados perfil_usuario, tipo_requisito e status_requisito. 2. Tabela de Notificacoes.sql cria a tabela notificacao com índices e políticas de RLS.
+
+3. add_feedback_validacao.sql Adiciona a coluna feedback_validacao ao requisito (RN007). 4. add_unique_codigo_requisito.sql Cria a constraint UNIQUE(id_projeto, codigo) que reforça a RN002. 5. add_data_criacao_requisito.sql Adiciona a coluna data_criacao ao requisito para ordenação cronológica nas listagens. 6. Politicas de RLS para acesso anon.sql Define as políticas de Row-Level Security para o role anon. 7. Seed de usuários, projetos e requisitos.txt Popula a base com dados de demonstração para os testes.
+Apêndice D -- Link do Protótipo de Alta Fidelidade Protótipo navegável das telas do sistema, desenvolvido no Figma durante a Sprint 1. Link: https://revamp-row-42812612.figma.site/login
+
+

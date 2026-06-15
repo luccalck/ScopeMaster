@@ -1,0 +1,152 @@
+/* =========================================================================
+   ScopeMaster — Glass Dashboard theme
+   Scoped under .sm-dash. Mirrors remodeling/dashboard.html (palette, gradient,
+   glass panels, glow) without touching the global Tailwind theme so the rest
+   of the app keeps its current look.
+   ========================================================================= */
+
+.sm-dash {
+  /* Material-ish palette from dashboard.html */
+  --sm-primary: #d2bbff;
+  --sm-primary-container: #7c3aed;
+  --sm-secondary: #4cd7f6;
+  --sm-tertiary: #ffb95f;
+  --sm-on-surface: #e6e0ec;
+  --sm-on-surface-variant: #ccc3d8;
+  --sm-surface: #14121a;
+  --sm-surface-container: #201e27;
+  --sm-surface-container-highest: #36333c;
+
+  position: fixed;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  color: var(--sm-on-surface);
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(
+    ellipse at 25% 35%,
+    #5c3820 0%,
+    #2c1a0e 30%,
+    #1a1208 55%,
+    #0a0806 100%
+  );
+}
+
+/* Bokeh glow layer */
+.sm-dash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 10% 80%, rgba(255, 185, 95, 0.1) 0%, transparent 40%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sm-dash > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Glass surfaces ---------------------------------------------------- */
+.sm-panel {
+  /* cinza escuro neutro, mantendo o vidro translúcido */
+  background: rgba(36, 38, 42, 0.55);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sm-panel-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  background: rgba(42, 44, 49, 0.62);
+}
+
+.sm-sidebar {
+  background: rgba(26, 28, 31, 0.7);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sm-glass-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s;
+}
+.sm-glass-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sm-primary-btn {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Decorative grid behind the evolution chart ------------------------ */
+.sm-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 80%);
+  mask-image: linear-gradient(to bottom, transparent, black 80%);
+}
+
+/* ---- Glow for chart strokes / map dots --------------------------------- */
+.sm-glow path {
+  filter: drop-shadow(0 0 4px rgba(124, 58, 237, 0.6));
+}
+.sm-dot-glow {
+  filter: drop-shadow(0 0 6px rgba(210, 187, 255, 0.9));
+}
+
+/* ---- Hide scrollbars ---------------------------------------------------- */
+.sm-noscroll::-webkit-scrollbar {
+  display: none;
+}
+.sm-noscroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Recent-requirements stacked cards (print 3) ----------------------- */
+.sm-stack {
+  position: relative;
+}
+/* O movimento dos cards é controlado pelo GSAP — sem transition em CSS
+   para evitar conflito/duplo easing. */
+.sm-stack-card {
+  backface-visibility: hidden;
+}
+
+/* ---- Brazil map interaction -------------------------------------------- */
+.sm-map-stage {
+  perspective: 900px;
+  cursor: grab;
+  touch-action: none;
+}
+.sm-map-stage.is-rotating {
+  cursor: grabbing;
+}
+.sm-map-world {
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear;
+  will-change: transform;
+}
+
+@keyframes sm-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.sm-shimmer {
+  animation: sm-shimmer 2.4s infinite;
+}
