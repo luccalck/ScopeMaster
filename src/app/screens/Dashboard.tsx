@@ -637,8 +637,8 @@ export function Dashboard() {
                     </span>
                   </div>
                 </div>
-                <div className="h-[200px]">
-                  <ResponsiveContainer width="100%" height="100%">
+                <div className="h-[200px] w-full min-w-0 relative">
+                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
                     <AreaChart data={serieMensal} margin={{ top: 8, right: 6, left: -22, bottom: 0 }}>
                       <defs>
                         <linearGradient id="smAreaCriados" x1="0" y1="0" x2="0" y2="1">
@@ -850,8 +850,8 @@ export function Dashboard() {
                 <p className="text-sm text-[#ccc3d8]">
                   {stats.aprovados} de {stats.totalRequisitos} requisitos
                 </p>
-                <div className="relative mx-auto flex h-[150px] items-center justify-center">
-                  <ResponsiveContainer width="100%" height={170}>
+                <div className="relative mx-auto w-full min-w-0 h-[150px] flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
                     <RadialBarChart
                       innerRadius="74%"
                       outerRadius="100%"
@@ -885,8 +885,8 @@ export function Dashboard() {
                     </span>
                   </span>
                 </div>
-                <div className="h-32">
-                  <ResponsiveContainer width="100%" height="100%">
+                <div className="h-32 w-full min-w-0 relative">
+                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
                     <BarChart data={atividadeSemana} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
                       <XAxis
                         dataKey="dia"
@@ -918,7 +918,7 @@ export function Dashboard() {
                 <h4 className="mb-3 text-base font-semibold text-white">Status dos Requisitos</h4>
                 <div className="flex items-center gap-4">
                   <div className="relative h-32 w-32 flex-shrink-0">
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="100%" height="100%" debounce={50}>
                       <PieChart>
                         <Pie
                           data={statusPie}

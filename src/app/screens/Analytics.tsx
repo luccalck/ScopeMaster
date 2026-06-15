@@ -47,6 +47,8 @@ import {
 } from "../components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../components/ui/avatar";
 import { toast } from "sonner";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import {
   fetchEstatisticasParaUsuario,
   fetchNotificacoes,
@@ -297,7 +299,133 @@ export function Analytics() {
   }, [requisitos, projetos, usuarios, stats]);
 
   const handleExport = () => {
-    toast.success("Relatório exportado com sucesso!");
+    try {
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const margin = 15;
+      let cursorY = margin;
+
+      // Cabeçalho
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text("Relatorio Global de Metricas - ScopeMaster", margin, cursorY);
+      cursorY += 8;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      doc.setTextColor(100);
+      doc.text(`Gerado em: ${new Date().toLocaleString("pt-BR")}`, margin, cursorY);
+      cursorY += 10;
+
+      // Linha divisória
+      doc.setDrawColor(200);
+      doc.line(margin, cursorY, pageWidth - margin, cursorY);
+      cursorY += 8;
+
+      // Seção 1: Resumo do Sistema
+      doc.setTextColor(0);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("Resumo Executivo", margin, cursorY);
+      cursorY += 6;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      const taxa = stats.totalRequisitos > 0 ? Math.round((stats.aprovados / stats.totalRequisitos) * 100) : 0;
+      const linhasResumo = [
+        `Total de Requisitos Cadastrados: ${stats.totalRequisitos}`,
+        `Requisitos Aprovados: ${stats.aprovados} (${taxa}% de aprovacao)`,
+        `Requisitos Pendentes de Validacao: ${stats.pendentes}`,
+        `Requisitos Rejeitados: ${stats.rejeitados}`,
+        `Total de Projetos Ativos: ${stats.totalProjetos}`,
+        `Total de Usuarios Cadastrados: ${stats.totalUsuarios} (${perfilCount?.Administrador || 0} Administradores, ${perfilCount?.Desenvolvedor || 0} Devs, ${perfilCount?.Cliente || 0} Clientes)`
+      ];
+
+      linhasResumo.forEach((linha) => {
+        const wrapped = doc.splitTextToSize(linha, pageWidth - margin * 2);
+        doc.text(wrapped, margin, cursorY);
+        cursorY += wrapped.length * 5;
+      });
+
+      cursorY += 6;
+
+      // Seção 2: Projetos e Distribuição de Requisitos
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("Metricas por Projeto", margin, cursorY);
+      cursorY += 6;
+
+      const bodyProjetos = projetos.map((p) => {
+        const reqs = requisitos.filter((r) => r.id_projeto === p.id_projeto);
+        const aprov = reqs.filter((r) => r.status_validacao === "Aprovado").length;
+        const pend = reqs.filter((r) => r.status_validacao === "Pendente").length;
+        const rejeit = reqs.filter((r) => r.status_validacao === "Rejeitado").length;
+        return [
+          p.nome,
+          reqs.length.toString(),
+          aprov.toString(),
+          pend.toString(),
+          rejeit.toString()
+        ];
+      });
+
+      autoTable(doc, {
+        startY: cursorY,
+        head: [["Nome do Projeto", "Total Reqs", "Aprovados", "Pendentes", "Rejeitados"]],
+        body: bodyProjetos,
+        styles: { fontSize: 10, cellPadding: 3, valign: "middle" },
+        headStyles: { fillColor: [124, 58, 237], textColor: 255, halign: "left" },
+        margin: { left: margin, right: margin }
+      });
+
+      cursorY = (doc as any).lastAutoTable.finalY + 12;
+
+      // Nova Página se necessário para usuários
+      if (cursorY > 220) {
+        doc.addPage();
+        cursorY = margin;
+      }
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("Distribuicao de Usuarios da Equipe", margin, cursorY);
+      cursorY += 6;
+
+      const bodyUsuarios = usuarios.map((u) => [
+        u.nome.replace("[PENDENTE] ", ""),
+        u.email,
+        u.perfil
+      ]);
+
+      autoTable(doc, {
+        startY: cursorY,
+        head: [["Nome", "E-mail", "Perfil de Acesso"]],
+        body: bodyUsuarios,
+        styles: { fontSize: 10, cellPadding: 3, valign: "middle" },
+        headStyles: { fillColor: [32, 30, 39], textColor: 255, halign: "left" },
+        margin: { left: margin, right: margin }
+      });
+
+      // Rodapé com numeração de páginas
+      const totalPaginas = doc.getNumberOfPages();
+      for (let i = 1; i <= totalPaginas; i++) {
+        doc.setPage(i);
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text(
+          `Pagina ${i} de ${totalPaginas} -- Relatorio de Metricas ScopeMaster`,
+          pageWidth / 2,
+          doc.internal.pageSize.getHeight() - 8,
+          { align: "center" }
+        );
+      }
+
+      doc.save(`Relatorio_Metricas_ScopeMaster_${Date.now()}.pdf`);
+      toast.success("Relatorio de metricas exportado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao exportar PDF de metricas:", error);
+      toast.error("Falha ao exportar relatorio. Tente novamente.");
+    }
   };
 
   if (loading) {
@@ -521,6 +649,7 @@ export function Analytics() {
             <div className="flex items-center gap-3">
               <NotificacoesBell userId={userId} />
               <button
+                type="button"
                 onClick={handleExport}
                 className="sm-glass-btn flex items-center gap-3 rounded-full px-4 py-2 text-sm font-medium text-white"
               >
@@ -580,8 +709,8 @@ export function Analytics() {
                 </div>
               </div>
               {reqsPorProjeto.length > 0 ? (
-                <div className="h-72 z-10 relative">
-                  <ResponsiveContainer width="100%" height="100%">
+                <div className="h-72 w-full min-w-0 z-10 relative">
+                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
                     <BarChart data={reqsPorProjeto} margin={{ top: 10, right: 5, left: -22, bottom: 20 }} barGap={4}>
                       <defs>
                         <linearGradient id="barAprovados" x1="0" y1="0" x2="0" y2="1">
@@ -618,8 +747,8 @@ export function Analytics() {
                 <h3 className="text-lg font-semibold text-white">Distribuição por Status</h3>
                 <p className="text-sm text-[#ccc3d8] mb-2">Total de {stats.totalRequisitos}</p>
               </div>
-              <div className="relative flex-1 min-h-[180px] flex items-center justify-center my-2">
-                <ResponsiveContainer width="100%" height={190}>
+              <div className="relative w-full min-w-0 flex-1 min-h-[180px] flex items-center justify-center my-2">
+                <ResponsiveContainer width="100%" height={190} debounce={50}>
                   <PieChart>
                     <Pie
                       data={statusDistribution}
@@ -709,8 +838,8 @@ export function Analytics() {
                 <h3 className="text-lg font-semibold text-white">Equipe por Perfil</h3>
                 <p className="text-sm text-[#ccc3d8]">Total de {stats.totalUsuarios} integrantes</p>
               </div>
-              <div className="relative h-36 w-full flex items-center justify-center my-2">
-                <ResponsiveContainer width="100%" height="100%">
+              <div className="relative h-36 w-full min-w-0 flex items-center justify-center my-2">
+                <ResponsiveContainer width="100%" height="100%" debounce={50}>
                   <PieChart>
                     <Pie
                       data={perfilDistribution}
