@@ -17,6 +17,13 @@ O ScopeMaster é uma plataforma moderna para o gerenciamento ágil de requisitos
 - **Backend/Database:** Supabase (PostgreSQL), Row-Level Security (RLS)
 - **PDF Gen:** pdf-lib
 
+## 🔑 Acesso para Avaliação
+
+Para acessar o sistema com privilégios de **Administrador**, utilize as seguintes credenciais previamente cadastradas no banco de dados (Supabase):
+
+- **E-mail:** `avaliador@senai.br`
+- **Senha:** `senai123`
+
 ## 📦 Como rodar este projeto
 
 1. Clone o repositório:
