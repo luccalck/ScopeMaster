@@ -1,47 +1,66 @@
-# ScopeMaster
+# ScopeMaster — Collaborative Software Requirements Management Platform
 
-O ScopeMaster é uma plataforma moderna para o gerenciamento ágil de requisitos de software e acompanhamento visual de escopo. Projetado como um TCC/Projeto Integrador, ele aproxima clientes e equipes de desenvolvimento através de validação em tempo real e documentação automatizada.
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-## 🚀 Funcionalidades Principais
+ScopeMaster is a modern collaborative platform for agile software requirements management and visual scope tracking. Developed as a Capstone Integrator Project (SENAI), it bridges the communication gap between clients and engineering teams through real-time validation workflows and automated PDF specification generation.
 
-- **Autenticação Segura:** Login, controle de sessão (JWT) integrado com Supabase Auth.
-- **Gestão de Projetos:** Criação de múltiplos ambientes de projetos para diferentes equipes.
-- **Backlog de Requisitos:** Cadastro, edição e detalhamento técnico de Requisitos Funcionais (RF) e Não Funcionais (RNF).
-- **Validação de Clientes (Consenso):** Clientes aprovam ou reprovam os requisitos via sistema de votação.
-- **Geração Automática de Documentação:** Compilação dos requisitos aprovados em formato PDF.
+---
 
-## 🛠️ Tecnologias Utilizadas
+## Key Features
 
-- **Frontend:** React, Vite, TypeScript
-- **Estilização:** Tailwind CSS, Shadcn UI, MUI
-- **Backend/Database:** Supabase (PostgreSQL), Row-Level Security (RLS)
-- **PDF Gen:** pdf-lib
+- **Secure Authentication & RBAC:** Role-Based Access Control (Admin, Developer, Client) integrated with Supabase Auth and Row-Level Security (RLS).
+- **Multi-Tenant Project Workspaces:** Isolated project environments with custom requirement backlogs.
+- **Requirement Lifecycle Management:** Technical detailing for Functional (FR) and Non-Functional Requirements (NFR).
+- **Client Consensus & Approval Flow:** Interactive approval voting system allowing clients to accept or request revisions on scope items.
+- **Automated Specification PDF Generation:** Client-side compiled PDF exports of approved technical specifications powered by `pdf-lib`.
 
-## 🔑 Acesso para Avaliação
+---
 
-Para acessar o sistema com privilégios de **Administrador**, utilize as seguintes credenciais previamente cadastradas no banco de dados (Supabase):
+## Tech Stack & Architecture
 
-- **E-mail:** `avaliador@senai.br`
-- **Senha:** `senai123`
+- **Frontend:** React 18, Vite, TypeScript
+- **UI Components & Styling:** Tailwind CSS, Shadcn UI, Material UI
+- **Database & Auth:** Supabase (PostgreSQL), Row-Level Security (RLS) policies
+- **PDF Compilation:** `pdf-lib`
 
-## 📦 Como rodar este projeto
+---
 
-1. Clone o repositório:
+## Evaluation Credentials (Demo Access)
+
+To test the platform with full **Administrator** privileges:
+
+* **Email:** `avaliador@senai.br`
+* **Password:** `senai123`
+
+---
+
+## Local Setup
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/luccalck/scope-master.git
+   cd scope-master
    ```
-2. Instale as dependências:
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
-3. Configure as variáveis de ambiente baseando-se no \`.env.example\`:
+
+3. **Configure environment variables:**
    ```bash
    cp .env.example .env
    ```
-4. Inicie o servidor de desenvolvimento:
+
+4. **Start the development server:**
    ```bash
    npm run dev
    ```
 
 ---
-*Desenvolvido pela equipe ScopeMaster - SENAI Taubaté (2026).*
+
+*Developed by the ScopeMaster Engineering Team — SENAI (2026).*
